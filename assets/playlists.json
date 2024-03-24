@@ -1,6 +1,6 @@
 {
   "2023-Vol-1.5": {
-    "path": "https://github.com/sitaber/sabes-beats/raw/main/playlists/2023-Vol-1.5/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/2023-Vol-1.5/",
     "files": [
       "01-Glazed Muffins.mp3",
       "02-Doggie Treats.mp3",
@@ -9,7 +9,7 @@
     ]
   },
   "2023-Vol-I": {
-    "path": "/playlists/2023-Vol-I/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/2023-Vol-I/",
     "files": [
       "01-Intro.mp3",
       "02-Gloomy.mp3",
@@ -27,7 +27,7 @@
     ]
   },
   "bithop": {
-    "path": "/playlists/bithop/",
+    "path": https://github.com/sitaber/sitaber-music/raw/main/playlists/bithop/",
     "files": [
       "01-Press Start.mp3",
       "02-Select Player.mp3",
@@ -38,7 +38,7 @@
     ]
   },
   "chillfi": {
-    "path": "/playlists/chillfi/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/chillfi/",
     "files": [
       "01-Chill-Hop.mp3",
       "02-Walk In The Park.mp3",
@@ -50,7 +50,7 @@
     ]
   },
   "FYEO": {
-    "path": "/playlists/FYEO/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/FYEO/",
     "files": [
       "01-Glass Hammers.mp3",
       "02-Animals on the Phone.mp3",
@@ -66,7 +66,7 @@
     ]
   },
   "HipHop-I": {
-    "path": "/playlists/HipHop-I/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/HipHop-I/",
     "files": [
       "01-GrooveMe (intro).mp3",
       "02-No Mondays.mp3",
@@ -84,7 +84,7 @@
     ]
   },
   "HipHop-II": {
-    "path": "/playlists/HipHop-II/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/HipHop-II/",
     "files": [
       "01-Intro.mp3",
       "02-Roll With Me.mp3",
@@ -100,7 +100,7 @@
     ]
   },
   "HipHop-III": {
-    "path": "/playlists/HipHop-III/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/HipHop-III/",
     "files": [
       "01-Its You.mp3",
       "02-Subtle Reflection.mp3",
