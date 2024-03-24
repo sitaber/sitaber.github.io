@@ -1,0 +1,72 @@
+/* Back to Top widget */
+.headerlink {
+  opacity:0;
+  padding-left: 5px;
+  text-decoration: none;
+}
+
+.headerlink:hover {
+  opacity:01;
+}
+
+/* Enable smooth scrolling */
+@media screen and (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Style the button */
+.top-link {
+  transition:       all .25s ease-in-out;
+  position:         fixed;
+  bottom:           0;
+  right:            0;
+  display:          inline-flex;
+  color:            #000000;
+
+  cursor:           pointer;
+  align-items:      center;
+  justify-content:  center;
+  margin:           0 2em 2em 0;
+  border-radius:    50%;
+  padding:          .25em;
+  width:            1em;
+  height:           1em;
+  background-color: #F8F8F8;
+}
+
+/* Code Hilites */
+.hljs-ln-numbers {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    text-align: right;
+    color: #aaa;
+    vertical-align: top;
+}
+
+.hljs-ln td.hljs-ln-numbers {padding-right: 1rem;}
+
+td.hljs-ln-line {
+    line-height: 21px;
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
+    border: 0;
+}
+
+table.hljs-ln {
+    border: 0;
+    margin: 0;
+}
+
+pre code.hljs {
+    padding: 0.8em;
+}
+
+pre:has(> code) { padding:0; margin:0;}
+

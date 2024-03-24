@@ -1,0 +1,120 @@
+{
+  "2023-Vol-1.5": {
+    "path": "/playlists/2023-Vol-1.5/",
+    "files": [
+      "01-Glazed Muffins.mp3",
+      "02-Doggie Treats.mp3",
+      "03-Musty Doritos.mp3",
+      "04-Juicy Peanuts.mp3"
+    ]
+  },
+  "2023-Vol-I": {
+    "path": "/playlists/2023-Vol-I/",
+    "files": [
+      "01-Intro.mp3",
+      "02-Gloomy.mp3",
+      "03-Shoe-da-Dupe.mp3",
+      "04-Take A Strool.mp3",
+      "05-Over Party.mp3",
+      "06-Misty Eyed.mp3",
+      "07-Are You.mp3",
+      "08-RapKittens.mp3",
+      "09-Bithop.mp3",
+      "10-Nikes.mp3",
+      "11-ONE BEAT.mp3",
+      "12-WolfCastle.mp3",
+      "13-Moone (Outro).mp3"
+    ]
+  },
+  "bithop": {
+    "path": "/playlists/bithop/",
+    "files": [
+      "01-Press Start.mp3",
+      "02-Select Player.mp3",
+      "03-Up Down Left Right.mp3",
+      "04-Mega Door Dash.mp3",
+      "05-Doc Even.mp3",
+      "06-GameBoi.mp3"
+    ]
+  },
+  "chillfi": {
+    "path": "/playlists/chillfi/",
+    "files": [
+      "01-Chill-Hop.mp3",
+      "02-Walk In The Park.mp3",
+      "03-Pepper Mint.mp3",
+      "04-Bright Breeze.mp3",
+      "05-Rain Clouds.mp3",
+      "07-Cool Mint.mp3",
+      "08-Lay-Z-Boy.mp3"
+    ]
+  },
+  "FYEO": {
+    "path": "/playlists/FYEO/",
+    "files": [
+      "01-Glass Hammers.mp3",
+      "02-Animals on the Phone.mp3",
+      "03-Misty Mountains.mp3",
+      "04-TropicalLude.mp3",
+      "05-Infected.mp3",
+      "06-Space Circus.mp3",
+      "07-Starbase 14.mp3",
+      "08-GlitchyLude.mp3",
+      "09-Wandering Halos.mp3",
+      "11-We Dont Dance.mp3",
+      "12-Fresh For Last.mp3"
+    ]
+  },
+  "HipHop-I": {
+    "path": "/playlists/HipHop-I/",
+    "files": [
+      "01-GrooveMe (intro).mp3",
+      "02-No Mondays.mp3",
+      "03-Silly Questions.mp3",
+      "04-Hills & Valleys.mp3",
+      "05-Loving That.mp3",
+      "06-Window Rasin.mp3",
+      "07-HangOver (interlude).mp3",
+      "08-Grouchy.mp3",
+      "09-Away We Go.mp3",
+      "10-Someday.mp3",
+      "11-The One You Are.mp3",
+      "12-Smile, Your On Camera.mp3",
+      "13-See You Next Time.mp3"
+    ]
+  },
+  "HipHop-II": {
+    "path": "/playlists/HipHop-II/",
+    "files": [
+      "01-Intro.mp3",
+      "02-Roll With Me.mp3",
+      "03-Adventurous Avocados.mp3",
+      "04-Stay Warm in the Dark.mp3",
+      "05-Stay Warm in the Light.mp3",
+      "06-This Way (interlude).mp3",
+      "07-System Agent.mp3",
+      "08-Can Confirm.mp3",
+      "09-Feeling Sleepy.mp3",
+      "10-Chill For a Minute.mp3",
+      "11-Five Dimes (interlude).mp3"
+    ]
+  },
+  "HipHop-III": {
+    "path": "/playlists/HipHop-III/",
+    "files": [
+      "01-Its You.mp3",
+      "02-Subtle Reflection.mp3",
+      "03-Early Tea Time.mp3",
+      "04-Give Me Love (interlude).mp3",
+      "05-Sup Apollo.mp3",
+      "06-Lets Pivot.mp3",
+      "07-Sun No Shine Here.mp3",
+      "08-Pass the Chi (interlude).mp3",
+      "09-JK.mp3",
+      "10-Fast Forward.mp3",
+      "11-Run Away Kittens.mp3",
+      "12-Sip Slowly.mp3",
+      "13-Tune in Next Week (outro).mp3"
+    ]
+  }
+}

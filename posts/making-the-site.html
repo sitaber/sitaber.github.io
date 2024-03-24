@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <title>Making the Site</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/atom-one-dark.css">
+  </head>
+
+  <body>
+    <div class="page-container">
+      <!-- HEADER -->
+      <div id="header_wrap" class="outer">
+        <header class="inner">
+                  <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+              <h1 id="project_title">Sitaber</h1>
+              <a class="nav_link" href="/index.html"> Home</a>
+              <a class="nav_link" href="/apps.html"> Apps</a>
+              <a class="nav_link" href="/games.html"> Games</a>
+              <a class="nav_link" href="/music.html"> Music</a>
+              <a class="nav_link" href="/blog.html"> Blog</a>
+            </header>
+        </div>
+        </header>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div id="main_content_wrap" class="outer content-wrap">
+        <section id="main_content" class="inner">
+          <noscript>
+            <div class="javascript-disabled">
+              JavaScript is disabled in your browser. Please enable it to view all elements on this webpage.
+            </div>
+          </noscript>
+          <h1 id="making-the-site">Making the Site<a class="headerlink" href="#making-the-site" title="Permanent link">&para;</a></h1>
+<p><em>Adventures in static sites</em></p>
+<hr>
+
+<blockquote>
+<p><em>March 19, 2024</em></p>
+</blockquote>
+<p><a class="top-link hide" href="#top">↑</a>
+<a name="top"></a></p>
+<p><strong>Table of Contents</strong></p>
+<div class="toc">
+<ul>
+<li><a href="#intro">Intro</a></li>
+<li><a href="#the-code">The Code</a></li>
+<li><a href="#adding-plotly-graphs">Adding Plotly Graphs</a></li>
+<li><a href="#extras">Extras</a></li>
+<li><a href="#the-end">The End!</a></li>
+</ul>
+</div>
+<h3 id="intro">Intro<a class="headerlink" href="#intro" title="Permanent link">&para;</a></h3>
+<p>After many attempts at using <a href="https://jekyllrb.com/">Jekyll</a> to build a static site for GitHub pages, I finally decided to roll my own static site builder. Jekyll works well out of the box, but trying to configure it to my needs was difficult. At times the documentation feels terse, at others, overly verbose.</p>
+<p>Additionally, trying to build a site from scratch is an absolute pain. I can handle HTML, JavaScript and some CSS. But, once you get into Responsive Web Design and more elaborate thing with CSS, problems can escalate quickly.</p>
+<p><strong>Solution</strong>: Use a base CSS file and modify to my needs, and use Python to build the generation pipeline.</p>
+<p>My 'pipeline' is very similar to the way Jekyll works. Write content of the HTML in markdown, with some front matter, and use HTML templates
+and a template engine to inject the content.</p>
+<h3 id="the-code">The Code<a class="headerlink" href="#the-code" title="Permanent link">&para;</a></h3>
+<p>So my python back-end builder consists of:</p>
+<ul>
+<li><a href="https://jinja.palletsprojects.com/en/3.1.x/">jinja2</a> for templates</li>
+<li><a href="https://pypi.org/project/python-frontmatter/">Python Frontmatter</a> to parse markdown front-matter and content</li>
+<li><a href="https://pypi.org/project/Markdown/">Python-Markdown</a> to render the markdown to HTML  </li>
+<li><a href="https://pypi.org/project/MarkupSafe/">MarkupSafe</a> for escaping HTML in the markdown files, allowing it to be correctly rendered</li>
+</ul>
+<p>My 'front-end' is handled by:</p>
+<ul>
+<li>A base CSS file from the github-pages theme <a href="https://github.com/pages-themes/slate">slate</a>. This styling is pleasing to me and is has very few CSS rule, so its easy to modify.</li>
+<li>JavaScript to:</li>
+<li>dynamically highlight code with <a href="https://highlightjs.org/">Highlights.js</a></li>
+<li>insert <a href="https://plotly.com/python/">Plotly</a> graphs, which I create in Python.  </li>
+</ul>
+<p>and that is it. Here is my Python code to render/build the static site</p>
+<details>
+<summary>Click to Show Code</summary>
+
+
+<pre><code class="language-python">from pathlib import Path
+import shutil
+
+import frontmatter
+import markdown
+from markdown.extensions.toc import TocExtension
+from markupsafe import Markup
+from jinja2 import Environment, FileSystemLoader, select_autoescape
+
+def make_html(page, out_path):
+     # 1) Load &lt;page&gt;.md and parse yaml and content
+    post = frontmatter.load(page)
+    metadata = post.metadata
+    content = post.content
+
+    # 2) Convert content to HTML
+    content = markdown.markdown()
+        content,
+        extensions=[
+            'fenced_code',
+            TocExtension(toc_depth=&quot;2-6&quot;, permalink=True)
+        ]
+    )
+    html = Markup(content) # make safe
+
+    # 3) Write to out_file
+    name = page.with_suffix('.html').name
+    out_file = Path(f&quot;{out_path}/{name}&quot;)
+
+    with open(out_file, &quot;w&quot;, encoding=&quot;utf-8&quot;) as f:
+        template = env.get_template(f&quot;{metadata['layout']}.html&quot;)
+        f.write(template.render(content=html, page=metadata))
+
+# --------------
+BUILD = Path(&quot;./_site&quot;)
+ASSETS = BUILD.joinpath(&quot;assets&quot;)
+POSTS = BUILD.joinpath(&quot;posts&quot;)
+PAGES = BUILD.joinpath(&quot;pages&quot;)
+
+# ---------------
+# Setup jinja environment
+env = Environment(
+    loader=FileSystemLoader(&quot;_templates&quot;),
+    autoescape=select_autoescape()
+)
+
+# ---------------
+# Remove DIRS
+if not BUILD.exists():
+    BUILD.mkdir()
+else:
+    for file_ in BUILD.glob(&quot;*.html&quot;):
+        file_.unlink()
+
+    if ASSETS.exists():
+        shutil.rmtree(ASSETS)
+    if POSTS.exists():
+        shutil.rmtree(POSTS)
+
+# remake/copy
+POSTS.mkdir()
+shutil.copytree(Path(&quot;./posts/resources&quot;), POSTS.joinpath(&quot;resources&quot;))
+shutil.copytree(Path(&quot;./assets&quot;), ASSETS)
+
+# -------------
+# Loop over pages and build HTML
+for page in Path(&quot;./pages&quot;).glob(&quot;*.md&quot;):
+    make_html(page, out_path=BUILD)
+
+for post in Path(&quot;./posts&quot;).glob(&quot;*.md&quot;):
+    make_html(post, out_path=POSTS)
+</code></pre>
+
+</details>
+
+<p><br></p>
+<p>Really simple. Remove directories as needed and remake them, copy all the assets, then loop over the markdown files rendering them to HTML and writing to the <code>_site</code> directory.</p>
+<p>This is the rough structure of the main directory:</p>
+<pre><code class="language-plaintext">.
+|- assets/
+|  |- css/
+|  |  |- style.css
+|  |- js/
+|     |- script.js
+|- pages/
+|  |- index.md
+|  |- page.md
+|- posts/
+|  |- post1.md
+|- _site/
+|  |- assets/  
+|  |- posts/
+|  |- index.html
+|- _templates/
+|  |- includes/
+|  |  |- header.html
+|  |- default.html
+|  |- posts.html
+|- build.py
+|- serve.sh
+</code></pre>
+<p><br>
+<code>build.py</code> is the above code and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory so I can build and view the site locally.</p>
+<p><strong>serve.sh</strong></p>
+<pre><code class="language-bash">#!/bin/bash
+python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
+</code></pre>
+<hr>
+<p><br></p>
+<h3 id="adding-plotly-graphs">Adding Plotly Graphs<a class="headerlink" href="#adding-plotly-graphs" title="Permanent link">&para;</a></h3>
+<p>With some JavaScript, we can easily include an interactive plot. (Notice the template tags!)</p>
+<pre><code class="language-html">&lt;script src=&quot;https://cdn.plot.ly/plotly-latest.min.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+  async function makePlots() {
+    const response = await fetch(&quot;/posts/resources/{{ page.plots }}/plots.json&quot;);
+    let plt_names = await response.json();
+
+    for (let [divID, file] of Object.entries(plt_names)) {
+      const response = await fetch(&quot;/posts/resources/{{ page.plots }}/&quot;+file);
+      let plotly_data = await response.json();
+      let ele = document.getElementById(divID);
+      var config = {responsive: true}
+      Plotly.react(ele, plotly_data.data, plotly_data.layout, config);
+    }
+  }
+&lt;/script&gt;
+</code></pre>
+<p>First we make the plot in Python and write it to JSON.</p>
+<pre><code class="language-python">import plotly.graph_objects as go
+import plotly.express as px
+
+fig = go.Figure(
+    data=[go.Bar(x=[1, 2, 3], y=[1, 3, 2])],
+    layout=go.Layout(height=600, width=800)
+)
+
+data_canada = px.data.gapminder().query(&quot;country == 'Canada'&quot;)
+fig = px.bar(data_canada, x='year', y='pop')
+
+fig.write_json(&quot;figure1.json&quot;)
+</code></pre>
+<p>Then the above JavaScript is used to load the Plotly JavaScript, fetch a JSON file named <strong>plots.json</strong> that contains:</p>
+<pre><code class="language-json">{&quot;plotly-fig1&quot;: &quot;figure1.json&quot;}
+</code></pre>
+<p>where the <em>div</em> id is the key and the name of the JSON file is its value. We loop over the first JSON, load the plot JSON and build the responsive graphs with Plotly's JavaScript library.</p>
+<p>To place the graph we add this HTML element to our markdown file for each figure:</p>
+<pre><code class="language-html">&lt;div id='plotly-fig1'&gt;&lt;/div&gt;
+&lt;div id='plotly-fig2'&gt;&lt;/div&gt;
+.
+.
+.
+&lt;div id='plotly-figN'&gt;&lt;/div&gt;
+</code></pre>
+<p>Here is a basic graph.</p>
+<p>(Requires JavaScript, so unblock this site or enable JavaScript if needed)</p>
+<div id='plotly-fig1'></div>
+
+<h3 id="extras">Extras<a class="headerlink" href="#extras" title="Permanent link">&para;</a></h3>
+<hr>
+<p><br></p>
+<p>With this setup, I can easily add more belsl and whistles, for example:</p>
+<ul>
+<li>Use the <a href="https://www.mathjax.org/">MathJax</a> JavaScript library to render LaTex equations, which I won't do too often.</li>
+<li>Use <a href="https://github.com/yusanshi/emgithub">emgithub</a> to embed markdown, code, or Jupyter notebooks.</li>
+<li>Anything else that comes up</li>
+</ul>
+<p>Here is an example of using <strong>emgithub</strong> to embed some code from one of my games:</p>
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsitaber%2Fmissile-mayhem%2Fblob%2Fmain%2Fapp%2Fenemy.py%23L1-L73&style=atom-one-dark&type=code&showLineNumbers=on"></script>
+
+<h3 id="the-end">The End!<a class="headerlink" href="#the-end" title="Permanent link">&para;</a></h3>
+<p>That's it for my first post, thanks for reading!</p>
+        </section>
+      </div>
+
+      <!-- FOOTER  -->
+      <div id="footer_wrap" class="outer footer-div">
+        <footer class="inner">
+          <p>&copy; 2024 <a href="https://github.com/sitaber">sitaber</a></p>
+        </footer>
+      </div>
+    </div>
+
+    <script src="/assets/js/highlight.min.js"></script>
+    <script src="/assets/js/python.min.js"></script>
+    <script src="/assets/js/highlightjs-line-numbers.js"></script>
+
+    
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+      async function makePlots() {
+        const response = await fetch("/posts/resources/making-the-site/plots.json");
+        let plt_names = await response.json();
+
+        for (let [divID, file] of Object.entries(plt_names)) {
+          const response = await fetch("/posts/resources/making-the-site/"+file);
+          let plotly_data = await response.json();
+          let ele = document.getElementById(divID);
+          var config = {responsive: true}
+          Plotly.react(ele, plotly_data.data, plotly_data.layout, config);
+        }
+      }
+    </script>
+    
+    <script>
+      window.onload = function () {
+      makePlots();
+      hljs.configure({cssSelector: 'pre code:not(.py)'})
+      hljs.highlightAll();
+      hljs.initLineNumbersOnLoad();
+      }
+    </script>
+  </body>
+</html>

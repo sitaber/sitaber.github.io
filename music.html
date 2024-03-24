@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset='utf-8'>
+    <title>Music</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" media="screen" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/audioPlayer.css">
+  </head>
+
+  <body>
+    <div class="page-container">
+      <!-- HEADER -->
+      <div id="header_wrap" class="outer">
+        <header class="inner">
+                  <!-- HEADER -->
+        <div id="header_wrap" class="outer">
+            <header class="inner">
+              <h1 id="project_title">Sitaber</h1>
+              <a class="nav_link" href="/index.html"> Home</a>
+              <a class="nav_link" href="/apps.html"> Apps</a>
+              <a class="nav_link" href="/games.html"> Games</a>
+              <a class="nav_link" href="/music.html"> Music</a>
+              <a class="nav_link" href="/blog.html"> Blog</a>
+            </header>
+        </div>
+        </header>
+      </div>
+
+      <!-- MAIN CONTENT -->
+      <div id="main_content_wrap" class="outer content-wrap">
+        <section id="main_content" class="inner">
+          <h1>Music</h1>
+          <hr>
+          <!-- Custom Audio Player !-->
+<div class="player-container">
+  <audio id="audioPlayer" class="audio" preload=”metadata” controls> No HTML5 support!</audio>
+
+  <!-- Main Control Bar !-->
+  <div class="controlBar">
+      <!-- Back Button !-->
+      <div class="buttonContainer" id="backButton">
+        <div class="icon icon-backward player-button" aria-hidden="true"></div>
+      </div>
+
+      <!-- Play Button !-->
+      <div class="buttonContainer" id="playButton" >
+        <div class="icon icon-play player-button" aria-hidden="true"></div>
+      </div>
+
+      <!-- Forward Button !-->
+      <div class="buttonContainer" id="forwardButton">
+        <div class="icon icon-forward player-button" aria-hidden="true"></div>
+      </div>
+
+      <!-- Progress Indicator !-->
+      <div style="width: calc(var(--width) * 0.30);">
+        <div id="progressRail">
+          <div id="progressBar"></div>
+        </div>
+      </div>
+
+      <!-- Time Text !-->
+      <div class="currentTime"> </div>
+      <div class="totalTime"> </div>
+
+      <!-- Volume Button !-->
+      <div class="buttonContainer" id="muteButton">
+        <div class="icon icon-volume-up player-button" aria-hidden="true"></div>
+      </div>
+
+      <!-- Volume Indicator !-->
+      <div style="width: calc(var(--width) * 0.20);">
+        <div id="volumeRail">
+          <div id="volumeBar"></div>
+        </div>
+      </div>
+  </div>
+  <!-- End Main Control Bar !-->
+
+  <!-- Playlists !-->
+  <div id="playlist">
+    <!-- <a class="playlist-item active">Select Files</a> -->
+  </div>
+  <!-- End Playlists !-->
+</div>
+          <hr>
+          <h3 id="playlists">Playlists<a class="headerlink" href="#playlists" title="Permanent link">&para;</a></h3>
+<hr>
+
+<h4 id="hip-hop">Hip Hop<a class="headerlink" href="#hip-hop" title="Permanent link">&para;</a></h4>
+<p><button class="list-button" name="2023-Vol-1.5">Play</button> <strong>2023 Vol-1.5</strong> - <em>Quick Snack</em></p>
+<p><button class="list-button" name="2023-Vol-I">Play</button> <strong>2023 Vol-I</strong> - <em>Fresh New Year</em></p>
+<p><button class="list-button" name="HipHop-I">Play</button> <strong>Hip-Hop-I</strong> - “classic” style beats</p>
+<p><button class="list-button" name='HipHop-II'>Play</button> <strong>Hip-Hop-II</strong> - Miscellaneous Hip-Hop beats</p>
+<p><button class="list-button" name='HipHop-III'>Play</button> <strong>Hip-Hop-III</strong> - More Hip-Hop beats</p>
+<hr>
+<h4 id="alternate-style-beats">Alternate Style Beats<a class="headerlink" href="#alternate-style-beats" title="Permanent link">&para;</a></h4>
+<p><button class="list-button" name="bithop">Play</button> <strong>Bithop</strong> - Gritty, bit crushed, audio-phonic experience</p>
+<p><button class="list-button" name="chillfi">Play</button> <strong>Chill-Fi</strong> - Laid back, chill, and lofi</p>
+<p><button class="list-button" name="FYEO">Play</button> <strong>FYEO</strong> - Journey through stereophonic sound</p>
+          <br>
+          <p> All music is licensed under a
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+              Creative Commons Attribution 4.0 International License</a>.
+          </p>
+
+        </section>
+      </div>
+
+      <!-- FOOTER  -->
+      <div id="footer_wrap" class="outer footer-div">
+        <footer class="inner">
+          <p>&copy; 2024 <a href="https://github.com/sitaber">sitaber</a></p>
+        </footer>
+      </div>
+  </div>
+
+  <script src="/assets/js/audioPlaylist.js"></script>
+  </body>
+</html>
