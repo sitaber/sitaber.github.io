@@ -27,7 +27,7 @@
     ]
   },
   "bithop": {
-    "path": https://github.com/sitaber/sitaber-music/raw/main/playlists/bithop/",
+    "path": "https://github.com/sitaber/sitaber-music/raw/main/playlists/bithop/",
     "files": [
       "01-Press Start.mp3",
       "02-Select Player.mp3",
