@@ -41,7 +41,7 @@
 <hr>
 
 <blockquote>
-<p><em>March 19, 2024</em></p>
+<p><em>March 24, 2024</em></p>
 </blockquote>
 <p><a class="top-link hide" href="#top">↑</a>
 <a name="top"></a></p>
@@ -58,11 +58,11 @@
 <h3 id="intro">Intro<a class="headerlink" href="#intro" title="Permanent link">&para;</a></h3>
 <p>After many attempts at using <a href="https://jekyllrb.com/">Jekyll</a> to build a static site for GitHub pages, I finally decided to roll my own static site builder. Jekyll works well out of the box, but trying to configure it to my needs was difficult. At times the documentation feels terse, at others, overly verbose.</p>
 <p>Additionally, trying to build a site from scratch is an absolute pain. I can handle HTML, JavaScript and some CSS. But, once you get into Responsive Web Design and more elaborate thing with CSS, problems can escalate quickly.</p>
-<p><strong>Solution</strong>: Use a base CSS file and modify to my needs, and use Python to build the generation pipeline.</p>
-<p>My 'pipeline' is very similar to the way Jekyll works. Write content of the HTML in markdown, with some front matter, and use HTML templates
+<p><strong>Solution</strong>: Use a base CSS file and modify to my needs + Python to build the generation pipeline.</p>
+<p>My 'pipeline' is very similar to the way Jekyll works. Write content in markdown with some front matter and use HTML templates
 and a template engine to inject the content.</p>
 <h3 id="the-code">The Code<a class="headerlink" href="#the-code" title="Permanent link">&para;</a></h3>
-<p>So my python back-end builder consists of:</p>
+<p>My python back-end builder consists of:</p>
 <ul>
 <li><a href="https://jinja.palletsprojects.com/en/3.1.x/">jinja2</a> for templates</li>
 <li><a href="https://pypi.org/project/python-frontmatter/">Python Frontmatter</a> to parse markdown front-matter and content</li>
@@ -77,8 +77,8 @@ and a template engine to inject the content.</p>
 <li>insert <a href="https://plotly.com/python/">Plotly</a> graphs, which I create in Python.  </li>
 </ul>
 <p>and that is it. Here is my Python code to render/build the static site</p>
-<details>
-<summary>Click to Show Code</summary>
+<details open>
+<summary>Click to Hide/Show Code</summary>
 
 
 <pre><code class="language-python">from pathlib import Path
@@ -182,8 +182,8 @@ for post in Path(&quot;./posts&quot;).glob(&quot;*.md&quot;):
 |- build.py
 |- serve.sh
 </code></pre>
-<p><br>
-<code>build.py</code> is the above code and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory so I can build and view the site locally.</p>
+<p><br></p>
+<p><code>build.py</code> is the above code and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory so I can build and view the site locally.</p>
 <p><strong>serve.sh</strong></p>
 <pre><code class="language-bash">#!/bin/bash
 python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
@@ -191,7 +191,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
 <hr>
 <p><br></p>
 <h3 id="adding-plotly-graphs">Adding Plotly Graphs<a class="headerlink" href="#adding-plotly-graphs" title="Permanent link">&para;</a></h3>
-<p>With some JavaScript, we can easily include an interactive plot. (Notice the template tags!)</p>
+<p>With some JavaScript, we can easily include an interactive plot.</p>
 <pre><code class="language-html">&lt;script src=&quot;https://cdn.plot.ly/plotly-latest.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   async function makePlots() {
@@ -222,11 +222,12 @@ fig = px.bar(data_canada, x='year', y='pop')
 
 fig.write_json(&quot;figure1.json&quot;)
 </code></pre>
-<p>Then the above JavaScript is used to load the Plotly JavaScript, fetch a JSON file named <strong>plots.json</strong> that contains:</p>
+<p><br></p>
+<p>Then the above JavaScript is used to load Plotly, fetch a JSON file named <strong>plots.json</strong> which contains:</p>
 <pre><code class="language-json">{&quot;plotly-fig1&quot;: &quot;figure1.json&quot;}
 </code></pre>
-<p>where the <em>div</em> id is the key and the name of the JSON file is its value. We loop over the first JSON, load the plot JSON and build the responsive graphs with Plotly's JavaScript library.</p>
-<p>To place the graph we add this HTML element to our markdown file for each figure:</p>
+<p>where the <em>div</em> id is the key and the name of the JSON file is its value. We then loop over <strong>plots.json</strong> to fetch and load each plot and build the responsive graphs.</p>
+<p>To control placement of graphs, we add this HTML element to our markdown file for each figure:</p>
 <pre><code class="language-html">&lt;div id='plotly-fig1'&gt;&lt;/div&gt;
 &lt;div id='plotly-fig2'&gt;&lt;/div&gt;
 .
@@ -238,17 +239,17 @@ fig.write_json(&quot;figure1.json&quot;)
 <p>(Requires JavaScript, so unblock this site or enable JavaScript if needed)</p>
 <div id='plotly-fig1'></div>
 
-<h3 id="extras">Extras<a class="headerlink" href="#extras" title="Permanent link">&para;</a></h3>
 <hr>
 <p><br></p>
-<p>With this setup, I can easily add more belsl and whistles, for example:</p>
+<h3 id="extras">Extras<a class="headerlink" href="#extras" title="Permanent link">&para;</a></h3>
+<p>With this setup, I can easily add more bells and whistles, for example:</p>
 <ul>
-<li>Use the <a href="https://www.mathjax.org/">MathJax</a> JavaScript library to render LaTex equations, which I won't do too often.</li>
+<li>Use <a href="https://www.mathjax.org/">MathJax</a> to render equations</li>
 <li>Use <a href="https://github.com/yusanshi/emgithub">emgithub</a> to embed markdown, code, or Jupyter notebooks.</li>
 <li>Anything else that comes up</li>
 </ul>
 <p>Here is an example of using <strong>emgithub</strong> to embed some code from one of my games:</p>
-<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsitaber%2Fmissile-mayhem%2Fblob%2Fmain%2Fapp%2Fenemy.py%23L1-L73&style=atom-one-dark&type=code&showLineNumbers=on"></script>
+<script src="https://emgithub.com/embed-v2.js?target=https%3A%2F%2Fgithub.com%2Fsitaber%2Fmissile-mayhem%2Fblob%2Fmain%2Fapp%2Fenemy.py&style=atom-one-dark&type=code&showBorder=on&showLineNumbers=on&showFileMeta=on&showFullPath=on&showCopy=on"></script>
 
 <h3 id="the-end">The End!<a class="headerlink" href="#the-end" title="Permanent link">&para;</a></h3>
 <p>That's it for my first post, thanks for reading!</p>
