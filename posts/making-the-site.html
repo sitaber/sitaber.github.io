@@ -72,7 +72,9 @@ and a template engine to inject the content.</p>
 <p>My 'front-end' is handled by:</p>
 <ul>
 <li>A base CSS file from the github-pages theme <a href="https://github.com/pages-themes/slate">slate</a>. This styling is pleasing to me and is has very few CSS rule, so its easy to modify.</li>
-<li>JavaScript to:</li>
+</ul>
+<p>And JavaScript to:</p>
+<ul>
 <li>dynamically highlight code with <a href="https://highlightjs.org/">Highlights.js</a></li>
 <li>insert <a href="https://plotly.com/python/">Plotly</a> graphs, which I create in Python.  </li>
 </ul>
@@ -97,7 +99,7 @@ def make_html(page, out_path):
     content = post.content
 
     # 2) Convert content to HTML
-    content = markdown.markdown()
+    content = markdown.markdown(
         content,
         extensions=[
             'fenced_code',
@@ -191,7 +193,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
 <hr>
 <p><br></p>
 <h3 id="adding-plotly-graphs">Adding Plotly Graphs<a class="headerlink" href="#adding-plotly-graphs" title="Permanent link">&para;</a></h3>
-<p>With some JavaScript, we can easily include an interactive plot.</p>
+<p>With some JavaScript in one of HTML templates, we can easily include an interactive plot.</p>
 <pre><code class="language-html">&lt;script src=&quot;https://cdn.plot.ly/plotly-latest.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   async function makePlots() {
