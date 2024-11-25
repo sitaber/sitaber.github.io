@@ -51,8 +51,6 @@
     max-width: 512px;
     margin: 0 auto;
   }
-  
-  
 }
 
 audio {
@@ -99,7 +97,7 @@ audio {
     }   
 }
 
-a:hover, a:focus {
+a.playlist-item:hover, a.playlist-item:focus {
     text-decoration: none;
 }
 
@@ -157,7 +155,8 @@ a:hover, a:focus {
     font-weight: bold;
     background: black;
     border: 5px solid grey;
-    overflow: scroll; /* set scroll */
+    overflow-y: scroll; /* set scroll */
+    overflow-x: hidden;
     height: 212px; /* limit height so scroll works */
 }
 
@@ -202,3 +201,15 @@ a.playlist-item.active {
   background-color: green;
 }
 
+/* Media Query to change time font size*/
+@media screen and (max-width: 512px) {
+  .currentTime {font-size:9px;};
+  .totalTime{font-size:9px};
+  
+}
+
+@media screen and (max-width: 370px) {
+  .currentTime {font-size:8px;};
+  .totalTime{font-size:8px};
+  
+}

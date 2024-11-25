@@ -36,37 +36,5 @@
   background-color: #F8F8F8;
 }
 
-/* Code Hilites */
-.hljs-ln-numbers {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
 
-    text-align: right;
-    color: #aaa;
-    vertical-align: top;
-}
-
-.hljs-ln td.hljs-ln-numbers {padding-right: 1rem;}
-
-td.hljs-ln-line {
-    line-height: 21px;
-    font-size: 12px;
-    font-family: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;
-    border: 0;
-}
-
-table.hljs-ln {
-    border: 0;
-    margin: 0;
-}
-
-pre code.hljs {
-    padding: 0.8em;
-}
-
-pre:has(> code) { padding:0; margin:0;}
 
