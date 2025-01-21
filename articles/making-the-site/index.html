@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-bs-theme="dark">
     <head>
     <title>Making the Site</title>
     
@@ -16,7 +16,7 @@
     
 </head>
 
-<body class="container" style="max-width: 1000px">
+<body class="container" style="max-width: 800px">
     <div class="header" style="padding-top: 20px; padding-bottom: 10px; margin: 0 auto">
     <div class="row">
         <div class="col">
@@ -59,22 +59,21 @@
 </ul>
 </div>
 <h3 id="intro">Intro</h3>
-<p>After many attempts at using <a href="https://jekyllrb.com/">Jekyll</a> to build a static site for GitHub pages, I finally decided to roll my own static site builder. Jekyll works well out of the box, but trying to configure it to my needs was difficult. At times the documentation feels terse, at others, overly verbose.</p>
-<p>Additionally, trying to build a site from scratch is an absolute pain. I can handle HTML, JavaScript and some CSS. But, once you get into Responsive Web Design and more elaborate thing with CSS, problems can escalate quickly.</p>
-<p><strong>Solution</strong>: Use a base CSS file and modify to my needs + Python to build the generation pipeline.</p>
-<p>My 'pipeline' is very similar to the way Jekyll works. Write content in markdown with some front matter and use HTML templates
-and a template engine to inject the content.</p>
+<p>After many attempts at using <a href="https://jekyllrb.com/">Jekyll</a> to build a static site for GitHub pages, I finally decided to roll my own static site generator. Jekyll works well out of the box, but trying to configure it to my needs was difficult. At times the documentation feels terse, at others, overly verbose.</p>
+<p>Additionally, trying to build a "fancy" site from scratch is an absolute pain. I can handle HTML, JavaScript and some CSS. But, once you get into Responsive Web Design and more elaborate things with CSS problems can start to creep up (at least for me).</p>
+<p><strong>Solution</strong>: Use a base CSS file and modify to my needs + Python for the generation pipeline.</p>
+<p>My 'pipeline' is very similar to the way Jekyll works. Write content in markdown with some front matter and use HTML templates and a template engine to inject the content.</p>
 <h3 id="the-code">The Code</h3>
-<p>My python back-end builder consists of:</p>
+<p>My python back-end consists of:</p>
 <ul>
 <li><a href="https://jinja.palletsprojects.com/en/3.1.x/">jinja2</a> for templates</li>
 <li><a href="https://pypi.org/project/python-frontmatter/">Python Frontmatter</a> to parse markdown front-matter and content</li>
 <li><a href="https://pypi.org/project/Markdown/">Python-Markdown</a> to render the markdown to HTML  </li>
 <li><a href="https://pypi.org/project/MarkupSafe/">MarkupSafe</a> for escaping HTML in the markdown files, allowing it to be correctly rendered</li>
 </ul>
-<p>My 'front-end' is handled by:</p>
+<p>My 'front-end':</p>
 <ul>
-<li>A base CSS file from the github-pages theme <a href="https://github.com/pages-themes/slate">slate</a>. This styling is pleasing to me and is has very few CSS rule, so its easy to modify.</li>
+<li>A base CSS file from the github-pages theme <a href="https://github.com/pages-themes/slate">slate</a>. This styling is pleasing to me and has very few CSS rules, so its easy to modify.</li>
 </ul>
 <p>And JavaScript to:</p>
 <ul>
@@ -188,7 +187,7 @@ for post in Path(&quot;./posts&quot;).glob(&quot;*.md&quot;):
 |- serve.sh
 </code></pre>
 <p><br></p>
-<p><code>build.py</code> is the above code and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory so I can build and view the site locally.</p>
+<p>Where the file <code>build.py</code> is the above code and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory, so I can build and view the site locally.</p>
 <p><strong>serve.sh</strong></p>
 <pre><code class="language-bash">#!/bin/bash
 python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
@@ -196,7 +195,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
 <hr>
 <p><br></p>
 <h3 id="adding-plotly-graphs">Adding Plotly Graphs</h3>
-<p>With some JavaScript in one of HTML templates, we can easily include an interactive plot.</p>
+<p>With some JavaScript in one of HTML templates we can easily include an interactive plot.</p>
 <pre><code class="language-html">&lt;script src=&quot;https://cdn.plot.ly/plotly-latest.min.js&quot;&gt;&lt;/script&gt;
 &lt;script&gt;
   async function makePlots() {
@@ -267,33 +266,11 @@ fig.write_json(&quot;figure1.json&quot;)
     <script src="/assets/js/highlight.min.js"></script>
     <script src="/assets/js/python.min.js"></script>
     <script src="/assets/js/highlightjs-line-numbers.js"></script>
-    
-    
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script>
-      async function makePlots() {
-        const response = await fetch("/articles/making-the-site/plots.json");
-        let plt_names = await response.json();
-
-        for (let [divID, file] of Object.entries(plt_names)) {
-          const response = await fetch("/articles/making-the-site/"+file);
-          let plotly_data = await response.json();
-          let ele = document.getElementById(divID);
-          var config = {responsive: true}
-          Plotly.react(ele, plotly_data.data, plotly_data.layout, config);
-        }
-      }
-    </script>
-    
-    
     <script>
       window.onload = function () {
-      hljs.configure({cssSelector: 'pre code:not(.py)'})
-      hljs.highlightAll();
-      hljs.initLineNumbersOnLoad();
-      
-      makePlots();
-      
+          hljs.configure({cssSelector: 'pre code:not(.py)'})
+          hljs.highlightAll();
+          hljs.initLineNumbersOnLoad();
       }
     </script>
     

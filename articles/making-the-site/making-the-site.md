@@ -17,27 +17,26 @@ _March 24, 2024_
 
 ### Intro
 
-After many attempts at using [Jekyll](https://jekyllrb.com/) to build a static site for GitHub pages, I finally decided to roll my own static site builder. Jekyll works well out of the box, but trying to configure it to my needs was difficult. At times the documentation feels terse, at others, overly verbose.
+After many attempts at using [Jekyll](https://jekyllrb.com/) to build a static site for GitHub pages, I finally decided to roll my own static site generator. Jekyll works well out of the box, but trying to configure it to my needs was difficult. At times the documentation feels terse, at others, overly verbose.
 
-Additionally, trying to build a site from scratch is an absolute pain. I can handle HTML, JavaScript and some CSS. But, once you get into Responsive Web Design and more elaborate thing with CSS, problems can escalate quickly.
+Additionally, trying to build a "fancy" site from scratch is an absolute pain. I can handle HTML, JavaScript and some CSS. But, once you get into Responsive Web Design and more elaborate things with CSS problems can start to creep up (at least for me).
 
-__Solution__: Use a base CSS file and modify to my needs + Python to build the generation pipeline.
+__Solution__: Use a base CSS file and modify to my needs + Python for the generation pipeline.
 
-My 'pipeline' is very similar to the way Jekyll works. Write content in markdown with some front matter and use HTML templates
-and a template engine to inject the content.
+My 'pipeline' is very similar to the way Jekyll works. Write content in markdown with some front matter and use HTML templates and a template engine to inject the content.
 
 ### The Code  
 
-My python back-end builder consists of:
+My python back-end consists of:
 
 - [jinja2](https://jinja.palletsprojects.com/en/3.1.x/) for templates
 - [Python Frontmatter](https://pypi.org/project/python-frontmatter/) to parse markdown front-matter and content
 - [Python-Markdown](https://pypi.org/project/Markdown/) to render the markdown to HTML  
   - [MarkupSafe](https://pypi.org/project/MarkupSafe/) for escaping HTML in the markdown files, allowing it to be correctly rendered
 
-My 'front-end' is handled by:
+My 'front-end':
 
-- A base CSS file from the github-pages theme [slate](https://github.com/pages-themes/slate). This styling is pleasing to me and is has very few CSS rule, so its easy to modify.
+- A base CSS file from the github-pages theme [slate](https://github.com/pages-themes/slate). This styling is pleasing to me and has very few CSS rules, so its easy to modify.
 
 And JavaScript to:
 
@@ -156,7 +155,7 @@ This is the rough structure of the main directory:
 ```
 <br>
 
-`build.py` is the above code and `serve.sh` is a simple script to run Pythons `http.server` and serve the `_site` directory so I can build and view the site locally.
+Where the file `build.py` is the above code and `serve.sh` is a simple script to run Pythons `http.server` and serve the `_site` directory, so I can build and view the site locally.
 
 __serve.sh__
 
@@ -169,7 +168,7 @@ python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
 
 ### Adding Plotly Graphs
 
-With some JavaScript in one of HTML templates, we can easily include an interactive plot.
+With some JavaScript in one of HTML templates we can easily include an interactive plot.
 
 ```html
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
