@@ -266,6 +266,23 @@ fig.write_json(&quot;figure1.json&quot;)
     <script src="/assets/js/highlight.min.js"></script>
     <script src="/assets/js/python.min.js"></script>
     <script src="/assets/js/highlightjs-line-numbers.js"></script>
+
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script>
+      async function makePlots() {
+        const response = await fetch("/articles/making-the-site/plots.json");
+        let plt_names = await response.json();
+
+        for (let [divID, file] of Object.entries(plt_names)) {
+          const response = await fetch("/articles/making-the-site/"+file);
+          let plotly_data = await response.json();
+          let ele = document.getElementById(divID);
+          var config = {responsive: true}
+          Plotly.react(ele, plotly_data.data, plotly_data.layout, config);
+        }
+      }
+    </script>
+    
     <script>
       window.onload = function () {
           hljs.configure({cssSelector: 'pre code:not(.py)'})
