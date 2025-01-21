@@ -187,7 +187,7 @@ for post in Path(&quot;./posts&quot;).glob(&quot;*.md&quot;):
 |- serve.sh
 </code></pre>
 <p><br></p>
-<p>Where the file <code>build.py</code> is the above code and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory, so I can build and view the site locally.</p>
+<p>Where the file <code>build.py</code> is the code from above and <code>serve.sh</code> is a simple script to run Pythons <code>http.server</code> and serve the <code>_site</code> directory, so I can build and view the site locally.</p>
 <p><strong>serve.sh</strong></p>
 <pre><code class="language-bash">#!/bin/bash
 python -m http.server 8000 --bind 127.0.0.1 --directory ./_site
